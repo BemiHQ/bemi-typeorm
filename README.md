@@ -8,9 +8,9 @@
   </a>
 
   <p align="center">
-    <a href="https://github.com/BemiHQ/bemi-typeorm-example/issues">Report Bug</a>
+    <a href="https://github.com/BemiHQ/typeorm/issues">Report Bug</a>
     ·
-    <a href="https://github.com/BemiHQ/bemi-typeorm-example/issues">Request Feature</a>
+    <a href="https://github.com/BemiHQ/typeorm/issues">Request Feature</a>
   </p>
 </div>
 
@@ -48,7 +48,6 @@ This middleware library is an optional TypeORM integration, enabling your applic
 - Time travel querying and ability to easily group and filter changes
 - Scalability with an automatically provisioned cloud infrastructure
 - Maintains full ownership of your data
-
 
 See [a demo and an example repo](https://github.com/BemiHQ/bemi-typeorm-example/) for TypeORM that automatically tracks all changes.
 
