@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://bemi.io/">
-    <img width="1201" alt="bemi-logo-github" src="https://github.com/BemiHQ/bemi-typeorm-example/assets/22333438/3415370d-d107-4e8d-bc30-e1f2faac677c">
+    <img width="1201" alt="bemi-logo-github" src="https://github.com/BemiHQ/typeorm/assets/22333438/53194a82-291c-4ae0-9121-e66c16bbab5c">
   </a>
 
   <p align="center">
@@ -49,7 +49,7 @@ This middleware library is an optional TypeORM integration, enabling your applic
 - Scalability with an automatically provisioned cloud infrastructure
 - Maintains full ownership of your data
 
-See [a demo and an example repo](https://github.com/BemiHQ/bemi-typeorm-example/) for TypeORM that automatically tracks all changes.
+See [a demo and an example repo](https://github.com/BemiHQ/typeorm-example) for TypeORM that automatically tracks all changes.
 
 <!-- Use cases -->
 
@@ -80,7 +80,7 @@ Get started by connecting your source database and installing this open-source l
 First, [connect the source PostgreSQL database](https://dashboard.bemi.io/log-in?ref=typeorm) you want to track data changes for. The database connection details are securely configured through the dashboard UI in a few seconds. Bemi currently doesn't support a self hosted option, but
 [contact us](mailto:hi@bemi.io) if this is required.
 
-![bemi-dashboard](https://github.com/BemiHQ/bemi-typeorm-example/assets/22333438/52b7fb55-b4a5-4746-9bc9-fd81fa0dd3df)
+![dashboard](https://github.com/BemiHQ/typeorm/assets/22333438/178ecb34-4591-4404-817f-49b9f4b8c517)
 
 Once your destination Postgres database has been fully provisioned, you'll stop seeing a pending status when hovering over the source database in the Bemi dashboard and can test the connection locally:
 
@@ -103,7 +103,7 @@ Lastly, connect directly to the Bemi PostgreSQL database to easily query change 
 1. Install the NPM package
 
 ```sh
-npm install @bemi/typeorm
+npm install @bemi-db/typeorm
 ```
 
 2. Generate a TypeORM compatible migration file to add lightweight [PostgreSQL triggers](https://www.postgresql.org/docs/current/plpgsql-trigger.html) for inserting application metadata into replication logs.
@@ -125,7 +125,7 @@ npx typeorm migration:run
 Add an [express.js](https://expressjs.com/) middleware. Here is an example of how to pass application context with all underlying data changes within an HTTP request:
 
 ```typescript
-import { bemiMetadata } from "@bemi/typeorm";
+import { bemiMetadata } from "@bemi-db/typeorm";
 import { bemiMetadata } from "./data-source";
 import express from "express";
 
@@ -157,7 +157,7 @@ To query the read-only historical data, add the Bemi destination database to Typ
 
 ```typescript
 import { DataSource } from "typeorm";
-import { Change } from "@bemi/typeorm";
+import { Change } from "@bemi-db/typeorm";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -201,7 +201,7 @@ BemiDataSource.initialize()
 Querying Changes:
 
 ```typescript
-import { Change } from "@bemi/typeorm";
+import { Change } from "@bemi-db/typeorm";
 import { BemiDataSource } from "./index";
 
 const changeRepository = BemiDataSource.getRepository(Change);
@@ -224,8 +224,7 @@ On the database level, Bemi securely connects to PostgreSQL's [Write-Ahead Log](
 On the application level, this library automatically passes application context and metadata to the replication logs to enhance the low-level database changes. For example, information about a user who made a change, an API endpoint where the change was triggered, a worker name that automatically triggered database changes, etc..
 
 Bemi workers then stitch the low-level data with the application context and store this information in a structured easily queryable format, as depicted below:
-
-![bemi-architechture](https://github.com/BemiHQ/bemi-typeorm-example/assets/22333438/6351b74c-7465-4b9c-8d04-a49b11c6b457)
+![bemi-architechture](https://github.com/BemiHQ/typeorm/assets/22333438/47e9a656-53a1-4789-952d-9968354611a2)
 
 The cloud solution includes worker ingesters, queues for fault tolerance, and an automatically scalable cloud-hosted PostgreSQL.
 

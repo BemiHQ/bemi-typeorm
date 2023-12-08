@@ -1,22 +1,19 @@
 {
-  "name": "@bemi/typeorm",
-  "version": "1.0.0",
+  "name": "@bemi-db/typeorm",
+  "version": "1.0.2",
   "description": "Automatic database change tracking for TypeORM.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "bin": {
     "bemi": "./dist/cli.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bemi/typeorm.git"
-  },
+  "repository": "git://github.com/bemihq/typeorm.git",
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bemi/typeorm/issues"
+    "url": "https://github.com/bemihq/typeorm/issues"
   },
-  "homepage": "https://github.com/bemi/typeorm#readme",
+  "homepage": "https://github.com/bemihq/typeorm#readme",
   "dependencies": {
     "commander": "^11.1.0"
   },
@@ -37,6 +34,7 @@
     "typescript": "^5.0.0",
     "typeorm": "^0.3.17"
   },
+  "registry-url": "https://registry.npmjs.org/",
   "scripts": {
     "build": "tsc",
     "postinstall": "npm run build",
