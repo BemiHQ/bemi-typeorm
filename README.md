@@ -32,7 +32,6 @@ This middleware library is an optional TypeORM integration, enabling your applic
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Demo](#demo)
 - [Architecture overview](#architecture-overview)
 - [License](#license)
 - [Code of Conduct](#code-of-conduct)
@@ -46,9 +45,12 @@ This middleware library is an optional TypeORM integration, enabling your applic
 - Highly performant without affecting code runtime execution with callbacks
 - Easy to use, no table structure changes required
 - 100% reliability in capturing data changes, even if executed through direct SQL outside the application
-- Time travel querying and ability to easily group + filter changes
+- Time travel querying and ability to easily group and filter changes
 - Scalability with an automatically provisioned cloud infrastructure
 - Maintains full ownership of your data
+
+
+See [a demo and an example repo](https://github.com/BemiHQ/bemi-typeorm-example/) for TypeORM that automatically tracks all changes.
 
 <!-- Use cases -->
 
@@ -76,7 +78,7 @@ There's a wide range of use cases that Bemi is built for! The tech was initially
 
 Get started by connecting your source database and installing this open-source library into your application to start storing all data changes in a provisioned cloud PostgreSQL destination database.
 
-First, [connect the source PostgreSQL database](https://dashboard.bemi.io/log-in/) you want to track data changes for. The database connection details are securely configured through the dashboard UI in a few seconds. Bemi currently doesn't support a self hosted option, but
+First, [connect the source PostgreSQL database](https://dashboard.bemi.io/log-in?ref=typeorm) you want to track data changes for. The database connection details are securely configured through the dashboard UI in a few seconds. Bemi currently doesn't support a self hosted option, but
 [contact us](mailto:hi@bemi.io) if this is required.
 
 ![bemi-dashboard](https://github.com/BemiHQ/bemi-typeorm-example/assets/22333438/52b7fb55-b4a5-4746-9bc9-fd81fa0dd3df)
@@ -124,7 +126,7 @@ npx typeorm migration:run
 Add an [express.js](https://expressjs.com/) middleware. Here is an example of how to pass application context with all underlying data changes within an HTTP request:
 
 ```typescript
-import { wrapTypeORM } from "@bemi/typeorm";
+import { bemiMetadata } from "@bemi/typeorm";
 import { bemiMetadata } from "./data-source";
 import express from "express";
 
@@ -136,7 +138,7 @@ const main = async (): Promise<void> => {
   app.use(
     bemiMetadata(AppDataSource, (req) => ({
       apiEndpoint: req.url,
-      userID: req.userID,
+      userID: req.user?.id,
       queryParams: req.query,
     }))
   );
@@ -181,9 +183,7 @@ export const BemiDataSource = new DataSource({
   logging: true,
   entities: [Change],
   migrations: [],
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: { rejectUnauthorized: false },
 });
 ```
 
@@ -211,14 +211,6 @@ const [changes, changesCount] = await changeRepository.findAndCount();
 console.log("All changes: ", changes);
 console.log("changes count: ", changesCount);
 ```
-
-<!-- Demo -->
-
-## Demo
-
-An [example Todo application](https://github.com/BemiHQ/bemi-typeorm-example/) that's automatically tracking all changes:
-
-https://github.com/BemiHQ/bemi-typeorm-example/assets/22333438/08fc2b2e-efba-4905-a710-78d611aaf531
 
 <!-- Architecture overview -->
 
@@ -259,6 +251,7 @@ Everyone interacting in the Bemi project's codebases, issue trackers, chat rooms
   - [x] TypeORM
   - [ ] Prisma
   - [ ] Sequelize
+- [ ] Track `TRUNCATE` SQL commands
 - [ ] Selective tracking of tables and fields
 - [ ] Passing application context in background jobs and cascading writes
 - [ ] ORM querying helpers
