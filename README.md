@@ -126,8 +126,9 @@ Add an [express.js](https://expressjs.com/) middleware. Here is an example of ho
 
 ```typescript
 import { bemiMetadata } from "@bemi-db/typeorm";
-import { bemiMetadata } from "./data-source";
 import express from "express";
+
+import { AppDataSource } from "./data-source";
 
 const main = async (): Promise<void> => {
   const app = express();
