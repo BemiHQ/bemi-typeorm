@@ -27,7 +27,7 @@ const getMigrationContent = (className: string) => {
 import {
   bemiUpSQL,
   bemiDownSQL,
-} from "@bemi/typeorm";
+} from "@bemi-db/typeorm";
 
 export class ${className} implements MigrationInterface {
 
