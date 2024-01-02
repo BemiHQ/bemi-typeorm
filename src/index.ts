@@ -2,35 +2,25 @@ import { DataSource } from "typeorm";
 import { AsyncLocalStorage } from "node:async_hooks";
 import { Request, Response, NextFunction } from "express";
 
-interface BemiMetadataConfig {
-  apiEndpoint: string;
-  userID: number;
-  queryParams: Request["query"];
-}
-
 interface PostgresDriver {
   postgres: any;
 }
 
 const asyncLocalStorage = new AsyncLocalStorage();
-export const bemiMetadata = (
+export const setContext = (
   typeORM: DataSource,
-  callback: (req: Request) => BemiMetadataConfig
+  callback: (req: Request) => any
 ) => {
   if ("postgres" in typeORM.driver) {
     const driver = typeORM.driver as PostgresDriver;
     const originalQuery = driver.postgres.Client.prototype.query;
-    driver.postgres.Client.prototype.query = async function <T = any>(
-      config,
-      values,
-      callback
-    ) {
+    driver.postgres.Client.prototype.query = async function(config: any, values: any, clbk: any) {
       const writeOperationsRegex = /(INSERT|UPDATE|DELETE)\s/gi;
       if (writeOperationsRegex.test(config)) {
         const context = asyncLocalStorage.getStore();
         config = config.concat(` /*Bemi ${JSON.stringify(context)} Bemi*/`);
       }
-      return await originalQuery.call(this, config, values, callback);
+      return await originalQuery.call(this, config, values, clbk);
     };
   } else {
     console.error("Bemi currently supports only PostgreSQL databases");

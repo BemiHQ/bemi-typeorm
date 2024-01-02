@@ -1,7 +1,10 @@
 # Changelog
 
-## v1.0.0
+## v1.1.0
 
-### Added or Changed
+- Updated license from MIT to LGPL-3.0 `#LoveOpenSource`
+- Renamed `bemiMetadata` to `setContext`
+
+## v1.0.0
 
 - Created package
