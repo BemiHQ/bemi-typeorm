@@ -22,7 +22,7 @@
   </p>
 </div>
 
-# Bemi
+# Bemi TypeORM
 
 [Bemi](https://bemi.io) plugs into [TypeORM](https://github.com/typeorm/typeorm) and PostgreSQL to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
@@ -125,4 +125,5 @@ The cloud solution includes worker ingesters, queues for fault tolerance, and an
 
 ## License
 
-Distributed under the terms of the [LGPL-3.0 License](LICENSE). If you need to modify the code, please release it to contribute back to the open-source community.
+Distributed under the terms of the [LGPL-3.0 License](LICENSE).
+If you need to modify and distribute the code, please release it to contribute back to the open-source community.
