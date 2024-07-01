@@ -14,7 +14,7 @@
     ·
     <a href="https://github.com/BemiHQ/bemi-typeorm/issues/new">Request Feature</a>
     ·
-    <a href="https://discord.gg/mXeZ6w2tGf">Discord</a>
+    <a href="https://join.slack.com/t/bemi-community/shared_invite/zt-2lv5jlg84-a4d6t7~5Zef~N9FRWgXhbw">Slack</a>
     ·
     <a href="https://twitter.com/BemiHQ">Twitter</a>
     ·
@@ -89,12 +89,10 @@ app.use(
 );
 ```
 
-Make database changes and make sure they're all stored in a table called `changes`
+Make database changes and make sure they're all stored in a table called `changes` in the destination DB
 
 ```
-psql -h us-west-1-prod-destination-pool.ctbxbtz4ojdc.us-west-1.rds.amazonaws.com -p 5432 -U u_9adb30103a55 -d db_9adb30103a55 -c \
-  'SELECT "primary_key", "table", "operation", "before", "after", "context", "committed_at" FROM changes;'
-Password for user u_9adb30103a55:
+psql -h [HOSTNAME] -U [USERNAME] -d [DATABASE] -c 'SELECT "primary_key", "table", "operation", "before", "after", "context", "committed_at" FROM changes;'
 
  primary_key | table | operation |                       before                      |                       after                        |                                context                                                      |      committed_at
 -------------+-------+-----------+---------------------------------------------------+----------------------------------------------------+---------------------------------------------------------------------------------------------+------------------------
