@@ -16,7 +16,7 @@
     ·
     <a href="https://discord.gg/mXeZ6w2tGf">Discord</a>
     ·
-    <a href="https://twitter.com/BemiHQ">Twitter</a>
+    <a href="https://x.com/BemiHQ">X</a>
     ·
     <a href="https://www.linkedin.com/company/bemihq/about">LinkedIn</a>
   </p>
@@ -103,15 +103,15 @@ psql -h [HOSTNAME] -U [USERNAME] -d [DATABASE] -c 'SELECT "primary_key", "table"
  27          | todo  | DELETE    | {"id": 27, "task": "Eat", "isCompleted": false}   | {}                                                 | {"userId": 187234, "endpoint": "/todo/27", "params": {"id": 27}}                            | 2023-12-11 17:09:18+00
 ```
 
-Check out our [TypeORM Docs](https://docs.bemi.io/orms/typeorm) for more details.
+Check out our [TypeORM docs](https://docs.bemi.io/orms/typeorm) for more details.
 
 ## Architecture overview
 
-Bemi is designed to be lightweight and secure. It takes a practical approach to achieving the benefits of [event sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) without requiring rearchitecting existing code, switching to highly specialized databases, or using unnecessary git-like abstractions on top of databases. We want your system to work the way it already does with your existing database to allow keeping things as simple as possible.
+Bemi is designed to be lightweight and secure. It takes a practical approach to achieving the benefits of [event sourcing](https://blog.bemi.io/rethinking-event-sourcing/) without requiring rearchitecting existing code, switching to highly specialized databases, or using unnecessary git-like abstractions on top of databases. We want your system to work the way it already does with your existing database to allow keeping things as simple as possible.
 
 Bemi plugs into both the database and application levels, ensuring 100% reliability and a comprehensive understanding of every change.
 
-On the database level, Bemi securely connects to PostgreSQL's [Write-Ahead Log](https://www.postgresql.org/docs/current/wal-intro.html)'s and implements [Change Data Capture](https://en.wikipedia.org/wiki/Change_data_capture). This allows tracking even the changes that get triggered via direct SQL.
+On the database level, Bemi securely connects to PostgreSQL's [Write-Ahead Log](https://www.postgresql.org/docs/current/wal-intro.html)'s and implements [Change Data Capture](https://blog.bemi.io/cdc/). This allows tracking even the changes that get triggered via direct SQL.
 
 On the application level, this package automatically passes application context to the replication logs to enhance the low-level database changes. For example, information about a user who made a change, an API endpoint where the change was triggered, a worker name that automatically triggered database changes, etc.
 
@@ -119,7 +119,7 @@ Bemi workers then stitch the low-level data with the application context and sto
 
 ![bemi-architechture](https://docs.bemi.io/img/architecture.png)
 
-The cloud solution includes worker ingesters, queues for fault tolerance, and an automatically scalable cloud-hosted PostgreSQL. Bemi currently doesn't support a self hosted option, but [contact us](mailto:hi@bemi.io) if this is required.
+The cloud solution includes worker ingesters, queues for fault tolerance, and a serverless PostgreSQL. If you are interested in running a self-hosted version yourself, see our [self-hosting docs](https://docs.bemi.io/self-hosting).
 
 ## License
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.2.0
+
+- Allow calling `setContext` multiple times
+- Validate the passed context payload size
+
 ## v1.1.0
 
 - Updated license from MIT to LGPL-3.0 `#LoveOpenSource`
