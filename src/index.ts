@@ -45,13 +45,17 @@ export const setContext = (
   wrapOriginalQuery(typeORM);
 
   return (req: Request, _res: Response, next: NextFunction) => {
-    const config = callback(req);
+    const context = callback(req);
 
-    ASYNC_LOCAL_STORAGE.run(config, () => {
+    ASYNC_LOCAL_STORAGE.run(context, () => {
       next();
     });
   };
 };
+
+export const bemiContext = (context: any) => {
+  ASYNC_LOCAL_STORAGE.enterWith(context);
+}
 
 export { bemiUpSQL, bemiDownSQL } from "./commands/migration-helpers";
 export { Change } from "./entities/Change";

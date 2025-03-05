@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.3.0
+
+- Add `bemiContext()` function for setting inline context
+
 ## v1.2.0
 
 - Allow calling `setContext` multiple times
