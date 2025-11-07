@@ -7,6 +7,9 @@
   "bin": {
     "bemi": "./dist/cli.js"
   },
+  "files": [
+    "dist"
+  ],
   "repository": "git://github.com/BemiHQ/bemi-typeorm.git",
   "author": "",
   "license": "LGPL-3.0",
